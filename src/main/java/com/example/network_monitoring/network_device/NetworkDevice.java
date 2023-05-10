@@ -11,9 +11,7 @@ public class NetworkDevice {
     private InetAddress ipAddress;
     private String macAddress;
     private String type;
-
     private boolean isUp;
-
     private boolean isLoopback;
 
     public NetworkDevice(String name, InetAddress ipAddress, String macAddress, String type, boolean isUp, boolean isLoopback) {

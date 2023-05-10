@@ -13,7 +13,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Представляє графік використання мережі, який відображає використання мережі у вигляді RX та TX байтів на часовому проміжку.
+ * Клас NetworkUsageGraph представляє графік використання мережі, який відображає використання мережі у вигляді RX та TX байтів на часовому проміжку.
  * Графік реалізований з використанням JavaFX.
  */
 public class NetworkUsageGraph extends Tab {
@@ -21,22 +21,27 @@ public class NetworkUsageGraph extends Tab {
      * Серія даних для отриманих байтів (Rx) на графіку.
      */
     private XYChart.Series<Number, Number> rxSeries;
+
     /**
      * Серія даних для надісланих байтів (Tx) на графіку.
      */
     private XYChart.Series<Number, Number> txSeries;
+
     /**
      * Кількість отриманих байтів (Rx).
      */
     private long rxBytes;
+
     /**
      * Кількість надісланих байтів (Tx).
      */
     private long txBytes;
+
     /**
      * Попереднє значення отриманих байтів (Rx).
      */
     private long oldRxBytes = 0L;
+
     /**
      * Попереднє значення надісланих байтів (Tx).
      */
@@ -47,6 +52,8 @@ public class NetworkUsageGraph extends Tab {
      * Також розпочинає процес оновлення графіку.
      */
     public NetworkUsageGraph() {
+        setText("Трафік");
+
         setupUI();
         startUpdating();
     }
@@ -77,10 +84,9 @@ public class NetworkUsageGraph extends Tab {
     }
 
     /**
-     * Налаштовує графічний інтерфейс користувача для відображення графіка використання мережі.
-     * Встановлює вісі X та Y, створює область графіка та встановлює заголовок.
-     * Ініціалізує серії даних для отриманих та надісланих байтів.
-     * Додає серії даних до графіка та встановлює його вміст.
+     * Починає оновлення даних мережевого використання та графіка на проміжках часу.
+     * Використовує Timer для запуску оновлення в фоновому потоці та Platform.runLater() для оновлення в головному потоці JavaFX.
+     * Оновлює дані мережевого використання та графік кожну секунду.
      */
     private void startUpdating() {
         Timer timer = new Timer();
