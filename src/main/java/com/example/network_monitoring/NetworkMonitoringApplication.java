@@ -5,6 +5,7 @@ import com.example.network_monitoring.network_statistic.NetworkStatistic;
 import com.example.network_monitoring.network_traffic.NetworkQuality;
 import com.example.network_monitoring.network_usage.NetworkUsageGraph;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Side;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
@@ -15,8 +16,12 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class NetworkMonitoringApplication extends Application {
+    public static void main(String[] args) {
+        launch();
+    }
+
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         StackPane root = new StackPane();
 
         TabPane tabPane = new TabPane();
@@ -53,6 +58,7 @@ public class NetworkMonitoringApplication extends Application {
 
 
 
+
         Tab networkLimitTab = new Tab("Обмеження трафіку");
         ImageView networkLimitIcon = new ImageView(new Image(getClass().getResourceAsStream("quality.png")));
         networkLimitIcon.setFitWidth(20);
@@ -85,9 +91,10 @@ public class NetworkMonitoringApplication extends Application {
 
         // Показуємо вікно
         primaryStage.show();
-    }
 
-    public static void main(String[] args) {
-        launch();
+        primaryStage.setOnCloseRequest(event -> {
+            Platform.exit();
+            System.exit(0);
+        });
     }
 }

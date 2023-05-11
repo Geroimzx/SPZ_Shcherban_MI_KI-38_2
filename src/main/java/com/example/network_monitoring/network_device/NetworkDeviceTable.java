@@ -12,16 +12,53 @@ import java.net.SocketException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Представляє вкладку для відображення таблиці мережевих пристроїв.
+ */
 public class NetworkDeviceTable extends Tab {
+    /**
+     * Таблиця, що відображає мережеві пристрої.
+     */
     public TableView<NetworkDevice> networkDevicesTable = new TableView<>();
+
+    /**
+     * Стовпець для відображення імені мережевого пристрою.
+     */
     private TableColumn<NetworkDevice, String> nameCol;
+
+    /**
+     * Стовпець для відображення IP-адреси мережевого пристрою.
+     */
     private TableColumn<NetworkDevice, String> ipAddressCol;
+
+    /**
+     * Стовпець для відображення MAC-адреси мережевого пристрою.
+     */
     private TableColumn<NetworkDevice, String> macAddressCol;
+
+    /**
+     * Стовпець для відображення типу мережевого пристрою.
+     */
     private TableColumn<NetworkDevice, String> deviceTypeCol;
+
+    /**
+     * Стовпець для відображення статусу "Up" мережевого пристрою.
+     */
     private TableColumn<NetworkDevice, Boolean> isUpCol;
+
+    /**
+     * Стовпець для відображення статусу "Loopback" мережевого пристрою.
+     */
     private TableColumn<NetworkDevice, Boolean> isLoopbackCol;
+
+    /**
+     * Список мережевих пристроїв, що використовується як джерело даних для таблиці.
+     */
     private ObservableList<NetworkDevice> networkDevices;
 
+    /**
+     * Конструктор класу NetworkDeviceTable.
+     */
     public NetworkDeviceTable() {
         setText("Мережеві пристрої");
 
@@ -61,6 +98,9 @@ public class NetworkDeviceTable extends Tab {
         setContent(networkDevicesTable);
     }
 
+    /**
+     * Запускає процес оновлення таблиці мережевих пристроїв.
+     */
     private void startUpdating() {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
